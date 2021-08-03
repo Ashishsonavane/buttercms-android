@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">buttercms</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="app_name">Buttercms</string>
+    <string name="tab_text_1">Home</string>
+    <string name="tab_text_2">Blog</string>
+    <string name="tab_text_3">Pages</string>
+    <string name="tab_text_4">Collections</string>
 </resources>

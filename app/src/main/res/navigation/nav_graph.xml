@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.buttercms.ui.main.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_blogsFragment"
+            app:destination="@id/blogsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_pagesFragment"
+            app:destination="@id/pagesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_collectionsFragment"
+            app:destination="@id/collectionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blogsFragment"
+        android:name="com.example.buttercms.ui.main.blog.BlogFragment"
+        android:label="fragment_blogs"
+        tools:layout="@layout/fragment_blogs" />
+    <fragment
+        android:id="@+id/pagesFragment"
+        android:name="com.example.buttercms.ui.main.page.PageFragment"
+        android:label="fragment_pages"
+        tools:layout="@layout/fragment_pages" />
+    <fragment
+        android:id="@+id/collectionsFragment"
+        android:name="com.example.buttercms.ui.main.collection.CollectionFragment"
+        android:label="fragment_collections"
+        tools:layout="@layout/fragment_collections" />
+</navigation>

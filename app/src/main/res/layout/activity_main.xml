@@ -9,23 +9,21 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Buttercms.AppBarOverlay">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+        android:theme="@style/Theme.Buttercms.AppBarOverlay"
+        >
 
         <com.google.android.material.tabs.TabLayout
+            app:tabTextAppearance="@style/MineCustomTabText"
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary" />
+            android:background="@color/white"
+            app:tabSelectedTextColor="@color/indigo_700"
+            app:tabIndicatorColor="@color/indigo_700"
+            app:tabTextColor="@color/black"
+           android:layout_gravity="center"
+            app:tabMode="scrollable" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -33,4 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
