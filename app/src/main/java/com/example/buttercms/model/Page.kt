@@ -1,6 +1,6 @@
 package com.example.buttercms.model
 
-data class Pages(
+data class Page(
     val author: String,
     val title: String,
     val description: String,

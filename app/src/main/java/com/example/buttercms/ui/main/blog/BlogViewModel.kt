@@ -8,12 +8,54 @@ class BlogViewModel : ViewModel() {
     var blogList: MutableList<Blog> = ArrayList()
 
     fun fetchData(): List<Blog> {
-        blogList.add(Blog("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        blogList.add(Blog("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        blogList.add(Blog("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        blogList.add(Blog("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        blogList.add(Blog("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        blogList.add(Blog("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
+        blogList.add(
+            Blog(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        blogList.add(
+            Blog(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        blogList.add(
+            Blog(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        blogList.add(
+            Blog(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        blogList.add(
+            Blog(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        blogList.add(
+            Blog(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
         return blogList
     }
 }

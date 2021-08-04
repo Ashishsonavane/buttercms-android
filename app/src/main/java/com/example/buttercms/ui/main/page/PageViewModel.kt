@@ -1,19 +1,61 @@
 package com.example.buttercms.ui.main.page
 
 import androidx.lifecycle.ViewModel
-import com.example.buttercms.model.Pages
+import com.example.buttercms.model.Page
 
 class PageViewModel : ViewModel() {
 
-    var pagesList: MutableList<Pages> = ArrayList()
+    var pageList: MutableList<Page> = ArrayList()
 
-    fun fetchData(): List<Pages> {
-        pagesList.add(Pages("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        pagesList.add(Pages("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        pagesList.add(Pages("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        pagesList.add(Pages("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        pagesList.add(Pages("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        pagesList.add(Pages("Orly Knopp", "EXAMPLE POST", "This is an example blog post", "07/01/2021"))
-        return pagesList
+    fun fetchData(): List<Page> {
+        pageList.add(
+            Page(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        pageList.add(
+            Page(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        pageList.add(
+            Page(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        pageList.add(
+            Page(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        pageList.add(
+            Page(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        pageList.add(
+            Page(
+                "Orly Knopp",
+                "EXAMPLE POST",
+                "This is an example blog post",
+                "07/01/2021"
+            )
+        )
+        return pageList
     }
 }

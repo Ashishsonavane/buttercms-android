@@ -1,4 +1,4 @@
 package com.example.buttercms.model
 
-class Collections {
+class Collection {
 }

@@ -15,8 +15,9 @@
             android:layout_height="match_parent"
             android:focusableInTouchMode="true">
 
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_blogs"
+                android:id="@+id/rv_blog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll_actionbar_layout"
@@ -33,5 +34,7 @@
                 android:elevation="10dp"
                 android:orientation="vertical" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
