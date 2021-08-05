@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/start_dest">
+    <fragment
+        android:id="@+id/start_dest"
+        android:name="com.example.buttercms.ui.main.viewpager.ViewPagerContainerFragment"
+        android:label="ButterCMS"
+        tools:layout="@layout/fragment_viewpager_container">
+
+
+        <action
+            android:id="@+id/action_start_dest_to_blogDetailFragment"
+            app:destination="@id/blogDetailFragment" />
+        <action
+            android:id="@+id/action_start_dest_to_pageDetailFragment"
+            app:destination="@id/pageDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blogDetailFragment"
+        android:name="com.example.buttercms.ui.main.blog.BlogDetailFragment"
+        android:label="Blog detail" />
+    <fragment
+        android:id="@+id/pageDetailFragment"
+        android:name="com.example.buttercms.ui.main.page.PageDetailFragment"
+        android:label="Page Detail" />
+
+
+</navigation>
