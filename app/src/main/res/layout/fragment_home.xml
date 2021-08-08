@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
         android:text="ButterCMS. \nHeadless CMS you'll melt over"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -27,21 +27,33 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1" />
 
+    <TextView
+        android:id="@+id/tv_subtitle_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:text="Easy to use marketing dashboard and blazing fast \ncontent API for your modern apps"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/section_label" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_blog"
-        android:layout_width="373dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/grey"
+        android:backgroundTintMode="@color/indigo_700"
         app:cardCornerRadius="7dp"
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true"
-       android:backgroundTintMode="@color/indigo_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section_label">
+        app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_home">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -54,9 +66,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="28dp"
                 android:text="Blog Engine"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,10 +80,10 @@
                 android:layout_marginStart="16dp"
                 android:lines="2"
                 android:text="You've got better things to do than building \nanother blog"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/indigo_700"
+                android:textSize="14sp"
                 android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
             <Button
@@ -81,10 +93,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:backgroundTint="@color/indigo_700"
-                app:layout_constraintStart_toStartOf="parent"
                 android:text="Preview integration"
-                android:textSize="12sp"
                 android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_subtitle" />
 
             <Button
@@ -92,8 +104,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
                 android:text="Learn more"
                 android:textColor="@color/indigo_700"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_blog_preview"
                 app:layout_constraintTop_toBottomOf="@+id/tv_subtitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -102,16 +117,16 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_pages"
-        android:layout_width="373dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
         android:background="@color/grey"
+        android:backgroundTintMode="@color/indigo_700"
         app:cardCornerRadius="7dp"
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true"
-        android:backgroundTintMode="@color/indigo_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_blog">
@@ -127,9 +142,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="28dp"
                 android:text="Pages"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -141,10 +156,10 @@
                 android:layout_marginStart="16dp"
                 android:lines="2"
                 android:text="Build SEO landing pages, knowledge base, \nnews articles, and more by using Page Types."
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/indigo_700"
+                android:textSize="14sp"
                 android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title_pages" />
 
             <Button
@@ -154,97 +169,129 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:backgroundTint="@color/indigo_700"
-                app:layout_constraintStart_toStartOf="parent"
                 android:text="Preview integration"
-                android:textSize="12sp"
                 android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_pages" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
                 android:text="Learn more"
                 android:textColor="@color/indigo_700"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_pages"
                 app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_pages" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_collections"
-            android:layout_width="373dp"
-            android:layout_height="200dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/grey"
-            app:cardCornerRadius="7dp"
-            app:cardElevation="5dp"
-            app:cardUseCompatPadding="true"
-            android:backgroundTintMode="@color/indigo_700"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_pages">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_collections"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/grey"
+        android:backgroundTintMode="@color/indigo_700"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_pages">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/tv_title_collections"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="28dp"
-                    android:text="Collections"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tv_title_collections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="28dp"
+                android:text="Collections"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
-                    android:id="@+id/tv_subtitle_collections"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:lines="2"
-                    android:text="Build SEO landing pages, knowledge base, \nnews articles, and more by using Page Types."
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:textColor="@color/indigo_700"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title_collections" />
+            <TextView
+                android:id="@+id/tv_subtitle_collections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:lines="2"
+                android:text="Build SEO landing pages, knowledge base, \nnews articles, and more by using Page Types."
+                android:textColor="@color/indigo_700"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_collections" />
 
-                <Button
-                    android:id="@+id/btn_collections"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
-                    android:backgroundTint="@color/indigo_700"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="Preview integration"
-                    android:textSize="12sp"
-                    android:textColor="@color/white"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_collections" />
+            <Button
+                android:id="@+id/btn_collections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/indigo_700"
+                android:text="Preview integration"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_collections" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="32dp"
-                    android:text="Learn more"
-                    android:textColor="@color/indigo_700"
-                    app:layout_constraintStart_toEndOf="@+id/btn_collections"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_collections" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="10sp"
+                android:text="Learn more"
+                android:textColor="@color/indigo_700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_collections"
+                app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_collections" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_read_doc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Read documentation"
+        app:layout_constraintStart_toEndOf="@+id/cv_collections"
+        app:layout_constraintTop_toBottomOf="@+id/cv_collections" />
+
+    <Button
+        android:id="@+id/btn_github"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="5dp"
+        android:text="View on Github"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_read_doc"
+        app:layout_constraintTop_toBottomOf="@+id/btn_read_doc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

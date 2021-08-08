@@ -5,27 +5,103 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.*
 import com.example.buttercms.R
+import com.example.buttercms.databinding.FragmentCollectionBinding
+import com.example.buttercms.databinding.ItemCollectionBinding
+import com.example.buttercms.model.Collection
+import com.example.buttercms.utils.createCoroutineErrorHandler
+import kotlinx.coroutines.launch
 
 class CollectionFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CollectionFragment()
-    }
-
-    private lateinit var viewModel: CollectionViewModel
+    private val collectionViewModel: CollectionViewModel by viewModels()
+    private lateinit var collectionAdapter: CollectionAdapter
+    private var _binding: FragmentCollectionBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_collection, container, false)
+    ): View {
+        _binding = FragmentCollectionBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        collectionAdapter = CollectionAdapter()
+        collectionViewModel.getData().observe(
+            viewLifecycleOwner,
+            { collections ->
+                collectionAdapter.submitList(collections)
+            }
+        )
+
+        val recyclerView = binding.rvCollections
+        val layoutManager: RecyclerView.LayoutManager
+        layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = collectionAdapter
+        recyclerView.layoutManager = layoutManager
+        recyclerView.itemAnimator = DefaultItemAnimator()
+
+        binding.srlReloadCollection.apply {
+            setOnRefreshListener {
+                lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
+                    collectionViewModel.loadData()
+                }
+                isRefreshing = false
+            }
+        }
+
+        return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CollectionViewModel::class.java)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onResume() {
+        lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
+            collectionViewModel.loadData()
+        }
+        super.onResume()
+    }
+
+    class CollectionAdapter :
+        ListAdapter<Collection, CollectionAdapter.NewsItemViewHolder>(DiffCallback()) {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
+
+            val inflater = LayoutInflater.from(parent.context)
+            val view = inflater.inflate(R.layout.item_collection, parent, false)
+            return NewsItemViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
+            holder.bind(getItem(position))
+        }
+
+        class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            fun bind(collection: Collection) {
+                val binding = ItemCollectionBinding.bind(itemView)
+                binding.apply {
+                    binding.tvTitleCollection.text = collection.name
+                    binding.tvDescriptionCollection.text = collection.description
+                }
+            }
+        }
+    }
+
+    class DiffCallback : DiffUtil.ItemCallback<Collection>() {
+
+        override fun areItemsTheSame(oldItem: Collection, newItem: Collection): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Collection, newItem: Collection): Boolean {
+            return oldItem.name == newItem.name
+        }
     }
 }

@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.example.buttercms.R
 import com.example.buttercms.databinding.FragmentPageBinding
 import com.example.buttercms.databinding.ItemPageBinding
 import com.example.buttercms.model.Page
+import com.example.buttercms.ui.main.viewpager.ViewPagerContainerFragmentDirections
+import com.example.buttercms.utils.DateFormatter
+import com.example.buttercms.utils.createCoroutineErrorHandler
+import kotlinx.coroutines.launch
 
 class PageFragment : Fragment() {
 
@@ -30,14 +34,28 @@ class PageFragment : Fragment() {
         _binding = FragmentPageBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // load data to the list
-        pageAdapter = PageAdapter(pageViewModel.fetchData())
+        pageAdapter = PageAdapter()
+        pageViewModel.getData().observe(
+            viewLifecycleOwner,
+            Observer<List<Page>> { page ->
+                pageAdapter.submitList(page)
+            })
+
         val recyclerView = binding.rvPages
         val layoutManager: RecyclerView.LayoutManager
         layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = pageAdapter
         recyclerView.layoutManager = layoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
+
+        binding.srlReloadPage.apply {
+            setOnRefreshListener {
+                lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
+                    pageViewModel.loadData()
+                }
+                isRefreshing = false
+            }
+        }
 
         return view
     }
@@ -46,10 +64,18 @@ class PageFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onResume() {
+        lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
+            pageViewModel.loadData()
+        }
+        super.onResume()
+    }
 }
 
-class PageAdapter(var pages: List<Page>) :
-    RecyclerView.Adapter<PageAdapter.NewsItemViewHolder>() {
+
+class PageAdapter() :
+    ListAdapter<Page, PageAdapter.NewsItemViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -58,26 +84,34 @@ class PageAdapter(var pages: List<Page>) :
     }
 
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
-        holder.bind(pages[position])
+        holder.bind(getItem(position))
     }
 
     class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(page: Page) {
             val binding = ItemPageBinding.bind(itemView)
+            val date = DateFormatter().formatDate(page.published)
             binding.apply {
-                binding.tvAuthorPage.text = page.author
-                binding.tvTitlePage.text = page.title
-                binding.tvDescriptionPage.text = page.description
-                binding.tvTimePage.text = page.published
+//                binding.tvAuthorPage.text = page.author
+                binding.tvTitlePage.text = page.name
+                binding.tvDescriptionPage.text = page.subtitle
+                binding.tvTimePage.text = date
+
             }
 
             itemView.setOnClickListener {
-                itemView.findNavController().navigate(R.id.action_start_dest_to_pageDetailFragment)
+                itemView.findNavController().navigate(ViewPagerContainerFragmentDirections.actionStartDestToPageDetailFragment(page, date.toString()))
             }
         }
     }
+}
+class DiffCallback : DiffUtil.ItemCallback<Page>() {
 
-    override fun getItemCount(): Int {
-        return pages.size
+    override fun areItemsTheSame(oldItem: Page, newItem: Page): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: Page, newItem: Page): Boolean {
+        return oldItem.name == newItem.name
     }
 }

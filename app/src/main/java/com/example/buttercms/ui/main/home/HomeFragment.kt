@@ -1,9 +1,12 @@
 package com.example.buttercms.ui.main.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.buttercms.R
@@ -17,9 +20,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var pageViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding.btnBlogPreview.setOnClickListener {
@@ -47,6 +47,14 @@ class HomeFragment : Fragment() {
         binding.btnCollections.setOnClickListener {
             val tabhost = activity?.findViewById<View>(R.id.tabLayout) as TabLayout
             tabhost.getTabAt(3)!!.select()
+        }
+
+        binding.btnReadDoc.setOnClickListener {
+            val url = "https://buttercms.com/docs/api/?javascript#get-a-single-page"
+            val uri = Uri.parse(url)
+            val customTabsIntent = CustomTabsIntent.Builder().build()
+            customTabsIntent.intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context?.let { it1 -> customTabsIntent.launchUrl(it1, uri) }
         }
 
         return binding.root
