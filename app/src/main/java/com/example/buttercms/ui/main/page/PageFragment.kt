@@ -6,16 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.*
+import com.bumptech.glide.Glide
 import com.example.buttercms.R
 import com.example.buttercms.databinding.FragmentPageBinding
 import com.example.buttercms.databinding.ItemPageBinding
 import com.example.buttercms.model.Page
 import com.example.buttercms.ui.main.viewpager.ViewPagerContainerFragmentDirections
-import com.example.buttercms.utils.DateFormatter
 import com.example.buttercms.utils.createCoroutineErrorHandler
 import kotlinx.coroutines.launch
 
@@ -37,16 +36,16 @@ class PageFragment : Fragment() {
         pageAdapter = PageAdapter()
         pageViewModel.getData().observe(
             viewLifecycleOwner,
-            Observer<List<Page>> { page ->
+            { page ->
                 pageAdapter.submitList(page)
-            })
+            }
+        )
 
-        val recyclerView = binding.rvPages
-        val layoutManager: RecyclerView.LayoutManager
-        layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = pageAdapter
-        recyclerView.layoutManager = layoutManager
-        recyclerView.itemAnimator = DefaultItemAnimator()
+        binding.rvPages.apply {
+            adapter = pageAdapter
+            layoutManager = LinearLayoutManager(context)
+            itemAnimator = DefaultItemAnimator()
+        }
 
         binding.srlReloadPage.apply {
             setOnRefreshListener {
@@ -73,13 +72,11 @@ class PageFragment : Fragment() {
     }
 }
 
-
-class PageAdapter() :
+class PageAdapter :
     ListAdapter<Page, PageAdapter.NewsItemViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_page, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_page, parent, false)
         return NewsItemViewHolder(view)
     }
 
@@ -90,21 +87,25 @@ class PageAdapter() :
     class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(page: Page) {
             val binding = ItemPageBinding.bind(itemView)
-            val date = DateFormatter().formatDate(page.published)
             binding.apply {
-//                binding.tvAuthorPage.text = page.author
-                binding.tvTitlePage.text = page.name
-                binding.tvDescriptionPage.text = page.subtitle
-                binding.tvTimePage.text = date
+                tvTitlePage.text = page.name
+                tvStudyNameDetail.text = page.fields.study_date
+                Glide.with(itemView)
+                    .load(page.fields.featured_image)
+                    .into(imgPage)
 
-            }
-
-            itemView.setOnClickListener {
-                itemView.findNavController().navigate(ViewPagerContainerFragmentDirections.actionStartDestToPageDetailFragment(page, date.toString()))
+                itemView.setOnClickListener {
+                    itemView.findNavController().navigate(
+                        ViewPagerContainerFragmentDirections.actionStartDestToPageDetailFragment(
+                            page
+                        )
+                    )
+                }
             }
         }
     }
 }
+
 class DiffCallback : DiffUtil.ItemCallback<Page>() {
 
     override fun areItemsTheSame(oldItem: Page, newItem: Page): Boolean {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_item_collection"
+        android:id="@+id/cv_collection_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -18,13 +18,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <!--        android:layout_marginBottom="7dp"-->
-        <!--        android:layout_marginLeft="21dp"-->
-        <!--        android:layout_marginRight="21dp"-->
-        <!--        android:layout_marginTop="7dp"-->
-
-        <!--        app:cardCornerRadius="8dp"-->
-        <!--        app:cardElevation="5dp"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,28 +27,31 @@
 
             <TextView
                 android:id="@+id/tv_title_collection"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="16dp"
-                android:text="TITLE"
-                android:textSize="18sp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/collection_title"
                 android:textStyle="bold"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_description_collection"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_subtitle_collection"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title_collection"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
-                android:text="DESCRIPTION"
-                android:textSize="16sp"
+                android:text="@string/collection_subtitle"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title_collection" />
         </androidx.constraintlayout.widget.ConstraintLayout>

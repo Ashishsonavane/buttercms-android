@@ -11,14 +11,14 @@ data class BlogResponse(
 
 @Parcelize
 data class Blog(
-    val published: String?,
+    val published: String,
     val title: String,
     @Json(name = "slug")
     val subtitle: String,
     val body: String,
     @Json(name = "featured_image")
-    val image: String?,
-    val author: Author?
+    val image: String,
+    val author: Author
 ) : Parcelable
 
 @Parcelize

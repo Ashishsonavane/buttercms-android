@@ -14,7 +14,7 @@ class ButterCmsRepository {
         setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
-    private val okhtpClient = OkHttpClient.Builder()
+    private val okhttpClient = OkHttpClient.Builder()
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
@@ -24,6 +24,6 @@ class ButterCmsRepository {
         .baseUrl(baseUrl)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .client(okhtpClient.addInterceptor(interceptor).build())
+        .client(okhttpClient.addInterceptor(interceptor).build())
         .build()
 }

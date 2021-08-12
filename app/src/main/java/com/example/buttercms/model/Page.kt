@@ -14,13 +14,17 @@ data class Page(
     @Json(name = "slug")
     val subtitle: String,
     val name: String,
-    val published: String?,
-    val updated: String?,
-    val page_type: String?,
-    val fields: Field?
+    val page_type: String,
+    val fields: Field
 ) : Parcelable
 
 @Parcelize
 data class Field(
-    val readme: String?
+    val title: String,
+    val content: String,
+    val industry: String,
+    val subindustry: String,
+    val featured_image: String,
+    val reviewer: String,
+    val study_date: String
 ) : Parcelable

@@ -13,8 +13,8 @@ class BlogViewModel : ViewModel() {
     fun getData(): MutableLiveData<List<Blog>> = apiResponseBlog
 
     suspend fun loadData() {
-        val getNews = BlogApiCallService.blogs.getBlogs()
-        val listResult = getNews.await()
+        val getBlogList = BlogApiCallService.data.getBlogs()
+        val listResult = getBlogList.await()
         apiResponseBlog.postValue(listResult.blogs)
     }
 }

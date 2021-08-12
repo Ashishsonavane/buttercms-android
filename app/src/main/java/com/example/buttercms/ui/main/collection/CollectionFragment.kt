@@ -37,13 +37,11 @@ class CollectionFragment : Fragment() {
                 collectionAdapter.submitList(collections)
             }
         )
-
-        val recyclerView = binding.rvCollections
-        val layoutManager: RecyclerView.LayoutManager
-        layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = collectionAdapter
-        recyclerView.layoutManager = layoutManager
-        recyclerView.itemAnimator = DefaultItemAnimator()
+        binding.rvCollections.apply {
+            adapter = collectionAdapter
+            layoutManager = LinearLayoutManager(context)
+            itemAnimator = DefaultItemAnimator()
+        }
 
         binding.srlReloadCollection.apply {
             setOnRefreshListener {
@@ -73,9 +71,8 @@ class CollectionFragment : Fragment() {
         ListAdapter<Collection, CollectionAdapter.NewsItemViewHolder>(DiffCallback()) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
-
-            val inflater = LayoutInflater.from(parent.context)
-            val view = inflater.inflate(R.layout.item_collection, parent, false)
+            val view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_collection, parent, false)
             return NewsItemViewHolder(view)
         }
 
@@ -87,8 +84,8 @@ class CollectionFragment : Fragment() {
             fun bind(collection: Collection) {
                 val binding = ItemCollectionBinding.bind(itemView)
                 binding.apply {
-                    binding.tvTitleCollection.text = collection.name
-                    binding.tvDescriptionCollection.text = collection.description
+                    binding.tvTitleCollection.text = collection.question
+                    binding.tvSubtitleCollection.text = collection.answer
                 }
             }
         }
@@ -101,7 +98,7 @@ class CollectionFragment : Fragment() {
         }
 
         override fun areContentsTheSame(oldItem: Collection, newItem: Collection): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.question == newItem.question
         }
     }
 }

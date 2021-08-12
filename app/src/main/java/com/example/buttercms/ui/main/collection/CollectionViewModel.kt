@@ -13,8 +13,8 @@ class CollectionViewModel : ViewModel() {
     fun getData(): MutableLiveData<List<Collection>> = apiResponseCollection
 
     suspend fun loadData() {
-        val getCollections = BlogApiCallService.blogs.getCollections()
-        val listResult = getCollections.await()
+        val getCollectionList = BlogApiCallService.data.getCollections()
+        val listResult = getCollectionList.await()
         apiResponseCollection.postValue(listResult.data.collection)
     }
 }

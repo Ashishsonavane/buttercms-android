@@ -42,12 +42,11 @@ class BlogFragment : Fragment() {
             }
         )
 
-        val recyclerView = binding.rvBlog
-        val layoutManager: RecyclerView.LayoutManager
-        layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = blogAdapter
-        recyclerView.layoutManager = layoutManager
-        recyclerView.itemAnimator = DefaultItemAnimator()
+        binding.rvBlog.apply {
+            adapter = blogAdapter
+            layoutManager = LinearLayoutManager(context)
+            itemAnimator = DefaultItemAnimator()
+        }
 
         binding.srlReloadBlog.apply {
             setOnRefreshListener {
@@ -77,9 +76,7 @@ class BlogFragment : Fragment() {
 class BlogAdapter : ListAdapter<Blog, BlogAdapter.NewsItemViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
-
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_blog, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_blog, parent, false)
         return NewsItemViewHolder(view)
     }
 
@@ -91,16 +88,17 @@ class BlogAdapter : ListAdapter<Blog, BlogAdapter.NewsItemViewHolder>(DiffCallba
         fun bind(blog: Blog) {
             val binding = ItemBlogBinding.bind(itemView)
             val date = DateFormatter().formatDate(blog.published)
+            val authorFirstName = blog.author.firstName
+            val authorLastName = blog.author.lastName
             binding.apply {
-                binding.tvAuthorBlog.text = blog.author?.firstName + " " + blog.author?.lastName
-                binding.tvTitleBlog.text = blog.title
-                binding.tvSubtitleBlog.text = blog.subtitle
-
-                binding.tvTimeBlog.text = date
+                binding.tvAuthorBlogItem.text = "$authorFirstName $authorLastName"
+                binding.tvTitleBlogItem.text = blog.title
+                binding.tvSubtitleBlogItem.text = blog.subtitle
+                binding.tvTimeBlogItem.text = date
 
                 Glide.with(itemView)
                     .load(blog.image)
-                    .into(binding.ivBlog)
+                    .into(binding.ivBlogItem)
             }
 
             itemView.setOnClickListener {

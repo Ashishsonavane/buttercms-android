@@ -13,7 +13,7 @@ class PageViewModel : ViewModel() {
     fun getData(): MutableLiveData<List<Page>> = apiResponsePage
 
     suspend fun loadData() {
-        val getPages = BlogApiCallService.blogs.getPages()
+        val getPages = BlogApiCallService.data.getPages()
         val listResult = getPages.await()
         apiResponsePage.postValue(listResult.pages)
     }

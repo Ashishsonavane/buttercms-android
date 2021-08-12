@@ -7,11 +7,11 @@ data class CollectionResponse(
 )
 
 data class Data(
-    @Json(name = "test")
+    @Json(name = "faq")
     val collection: List<Collection>
 )
 
 data class Collection(
-    val name: String,
-    val description: String
+    val question: String,
+    val answer: String
 )
