@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.buttercms.databinding.FragmentPageDetailBinding
 
 class PageDetailFragment : Fragment() {
-    private val pageViewModel: PageViewModel by viewModels()
+    private val args: PageDetailFragmentArgs by navArgs()
     private var _binding: FragmentPageDetailBinding? = null
     private val binding get() = _binding!!
 
@@ -17,10 +18,19 @@ class PageDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPageDetailBinding.inflate(inflater, container, false)
         val view = binding.root
-        requireActivity().title = "PageDetail"
+
+        binding.apply {
+            tvTitlePageDetail.text = args.page.fields.title
+            tvStudyDateName.text = args.page.fields.study_date
+            tvIndustryName.text = args.page.fields.industry
+            tvContentPageDetail.text = args.page.fields.content
+            Glide.with(view)
+                .load(args.page.fields.featured_image)
+                .into(ivPageDetail)
+        }
         return view
     }
 

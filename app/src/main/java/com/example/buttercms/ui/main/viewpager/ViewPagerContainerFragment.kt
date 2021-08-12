@@ -40,7 +40,7 @@ class ViewPagerContainerFragment : Fragment() {
             tab.text = when (position) {
                 0 -> "Home"
                 1 -> "Blogs"
-                2 -> "Posts"
+                2 -> "Pages"
                 else -> "Collections"
             }
         }.attach()

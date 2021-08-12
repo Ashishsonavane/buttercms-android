@@ -4,4 +4,49 @@
     <string name="tab_text_2">Blog</string>
     <string name="tab_text_3">Pages</string>
     <string name="tab_text_4">Collections</string>
+
+
+    <!-- home-->
+    <string name="blog_url">https://buttercms.com/features/#flexiblecontentmodeling-blog-engine</string>
+    <string name="page_url">https://buttercms.com/features/#flexiblecontentmodeling-collections</string>
+    <string name="collection_url">https://buttercms.com/features/#flexiblecontentmodeling-collections</string>
+    <string name="documentation">https://buttercms.com/docs/api/?javascript#get-a-single-page</string>
+
+    <string name="home_title">ButterCMS. \nHeadless CMS you\'ll melt over</string>
+    <string name="home_subtitle">Easy to use marketing dashboard and blazing fast \ncontent API for your modern apps</string>
+
+    <string name="home_blog_title">Blog Engine</string>
+    <string name="home_blog_subtitle">You\'ve got better things to do than building \nanother blog</string>
+    <string name="home_page_title">Pages</string>
+    <string name="home_page_subtitle">Build SEO landing pages, knowledge base, \nnews articles, and more by using Page Types.</string>
+    <string name="home_collection_title">Collections</string>
+    <string name="home_collection_subtitle">Build SEO landing pages, knowledge base, \nnews articles, and more by using Page Types.</string>
+
+    <string name="home_button_preview">Preview integration</string>
+    <string name="home_button_learn">Learn more</string>
+
+    <string name="home_button_documentation">Read documentation</string>
+    <string name="home_button_github">View on Github</string>
+
+    <!--blog-->
+    <string name="blog_author">AUTHOR</string>
+    <string name="blog_title">TITLE</string>
+    <string name="blog_subtitle">SUBTITLE</string>
+    <string name="blog_time">TIME</string>
+
+    <!-- page -->
+    <string name="page_title">Case studies</string>
+    <string name="page_item_title">TITLE</string>
+    <string name="page_item_study_date">Study date: </string>
+    <string name="page_item_study_date_value">July 01 1990</string>
+    <string name="page_item_industry">Industry: </string>
+    <string name="page_item_industry_name">Engine Parts</string>
+    <string name="page_item_reviewer">Reviewed by customer</string>
+    <string name="page_item_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet odio accumsan, sollicitudin mi vel, condimentum sapien. Nullam sed laoreet leo. Sed a ligula quis ante luctus volutpat et cursus enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque et erat tincidunt, volutpat augue id, viverra felis. Sed pharetra, libero ut euismod euismod, leo metus commodo metus</string>
+
+    <!-- collection -->
+    <string name="collection_list_title">FAQ</string>
+    <string name="collection_title">TITLE</string>
+    <string name="collection_subtitle">SUBTITLE</string>
+
 </resources>

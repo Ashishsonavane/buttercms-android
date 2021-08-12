@@ -20,12 +20,24 @@
     </fragment>
     <fragment
         android:id="@+id/blogDetailFragment"
-        android:name="com.example.buttercms.ui.main.blog.BlogDetailFragment"
-        android:label="Blog detail" />
+        android:name="com.example.buttercms.ui.main.blog.BlogDetailFragment">
+        <argument
+            android:name="blog"
+            app:argType="com.example.buttercms.model.Blog" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/pageDetailFragment"
-        android:name="com.example.buttercms.ui.main.page.PageDetailFragment"
-        android:label="Page Detail" />
+        android:name="com.example.buttercms.ui.main.page.PageDetailFragment">
+        <argument
+            android:name="page"
+            app:argType="com.example.buttercms.model.Page" />
+<!--        <argument-->
+<!--            android:name="time"-->
+<!--            app:argType="string" />-->
+    </fragment>
 
 
 </navigation>

@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
+import com.bumptech.glide.Glide
 import com.example.buttercms.R
 import com.example.buttercms.databinding.FragmentBlogBinding
 import com.example.buttercms.databinding.ItemBlogBinding
 import com.example.buttercms.model.Blog
+import com.example.buttercms.ui.main.viewpager.ViewPagerContainerFragmentDirections
+import com.example.buttercms.utils.DateFormatter
+import com.example.buttercms.utils.createCoroutineErrorHandler
+import kotlinx.coroutines.launch
 
 class BlogFragment : Fragment() {
 
@@ -26,16 +30,32 @@ class BlogFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBlogBinding.inflate(inflater, container, false)
         val view = binding.root
-        blogAdapter = BlogAdapter(blogViewModel.fetchData())
-        val recyclerView = binding.rvBlog
-        val layoutManager: RecyclerView.LayoutManager
-        layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = blogAdapter
-        recyclerView.layoutManager = layoutManager
-        recyclerView.itemAnimator = DefaultItemAnimator()
+
+        blogAdapter = BlogAdapter()
+        blogViewModel.getData().observe(
+            viewLifecycleOwner,
+            { blogs ->
+                blogAdapter.submitList(blogs)
+            }
+        )
+
+        binding.rvBlog.apply {
+            adapter = blogAdapter
+            layoutManager = LinearLayoutManager(context)
+            itemAnimator = DefaultItemAnimator()
+        }
+
+        binding.srlReloadBlog.apply {
+            setOnRefreshListener {
+                lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
+                    blogViewModel.loadData()
+                }
+                isRefreshing = false
+            }
+        }
 
         return view
     }
@@ -44,38 +64,62 @@ class BlogFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onResume() {
+        lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
+            blogViewModel.loadData()
+        }
+        super.onResume()
+    }
 }
 
-class BlogAdapter(var blog: List<Blog>) :
-    RecyclerView.Adapter<BlogAdapter.NewsItemViewHolder>() {
+class BlogAdapter : ListAdapter<Blog, BlogAdapter.NewsItemViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_blog, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_blog, parent, false)
         return NewsItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
-        holder.bind(blog[position])
+        holder.bind(getItem(position))
     }
 
     class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(blog: Blog) {
             val binding = ItemBlogBinding.bind(itemView)
+            val date = DateFormatter().formatDate(blog.published)
+            val authorFirstName = blog.author.firstName
+            val authorLastName = blog.author.lastName
             binding.apply {
-                binding.tvAuthorBlog.text = blog.author
-                binding.tvTitleBlog.text = blog.title
-                binding.tvDescriptionBlog.text = blog.description
-                binding.tvTimeBlog.text = blog.published
+                binding.tvAuthorBlogItem.text = "$authorFirstName $authorLastName"
+                binding.tvTitleBlogItem.text = blog.title
+                binding.tvSubtitleBlogItem.text = blog.subtitle
+                binding.tvTimeBlogItem.text = date
+
+                Glide.with(itemView)
+                    .load(blog.image)
+                    .into(binding.ivBlogItem)
             }
 
             itemView.setOnClickListener {
-                itemView.findNavController().navigate(R.id.action_start_dest_to_blogDetailFragment)
+                itemView.findNavController().navigate(
+                    ViewPagerContainerFragmentDirections.actionStartDestToBlogDetailFragment(
+                        blog,
+                        date.toString()
+                    )
+                )
             }
         }
     }
+}
 
-    override fun getItemCount(): Int {
-        return blog.size
+class DiffCallback : DiffUtil.ItemCallback<Blog>() {
+
+    override fun areItemsTheSame(oldItem: Blog, newItem: Blog): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: Blog, newItem: Blog): Boolean {
+        return oldItem.title == newItem.title
     }
 }
