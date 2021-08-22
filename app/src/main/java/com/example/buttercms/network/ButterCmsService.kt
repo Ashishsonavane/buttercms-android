@@ -2,6 +2,7 @@ package com.example.buttercms.network
 
 import com.example.buttercms.model.BlogResponse
 import com.example.buttercms.model.CollectionResponse
+import com.example.buttercms.model.HomePageResponse
 import com.example.buttercms.model.PageResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -16,6 +17,9 @@ interface ButterCmsInterface {
 
     @GET("/v2/pages/case_studies/?locale=en&preview=1&auth_token=$AUTH_TOKEN")
     fun getPages(): Call<PageResponse>
+
+    @GET("/v2/pages/homepage?locale=en&preview=1&auth_token=$AUTH_TOKEN")
+    fun getHomePage(): Call<HomePageResponse>
 
     @GET("/v2/content/faq/?locale=en&auth_token=$AUTH_TOKEN")
     fun getCollections(): Call<CollectionResponse>

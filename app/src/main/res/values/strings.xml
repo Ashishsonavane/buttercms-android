@@ -5,28 +5,11 @@
     <string name="tab_text_3">Pages</string>
     <string name="tab_text_4">Collections</string>
 
-
     <!-- home-->
-    <string name="blog_url">https://buttercms.com/features/#flexiblecontentmodeling-blog-engine</string>
-    <string name="page_url">https://buttercms.com/features/#flexiblecontentmodeling-collections</string>
-    <string name="collection_url">https://buttercms.com/features/#flexiblecontentmodeling-collections</string>
-    <string name="documentation">https://buttercms.com/docs/api/?javascript#get-a-single-page</string>
-
-    <string name="home_title">ButterCMS. \nHeadless CMS you\'ll melt over</string>
-    <string name="home_subtitle">Easy to use marketing dashboard and blazing fast \ncontent API for your modern apps</string>
-
-    <string name="home_blog_title">Blog Engine</string>
-    <string name="home_blog_subtitle">You\'ve got better things to do than building \nanother blog</string>
-    <string name="home_page_title">Pages</string>
-    <string name="home_page_subtitle">Build SEO landing pages, knowledge base, \nnews articles, and more by using Page Types.</string>
-    <string name="home_collection_title">Collections</string>
-    <string name="home_collection_subtitle">Build SEO landing pages, knowledge base, \nnews articles, and more by using Page Types.</string>
-
     <string name="home_button_preview">Preview integration</string>
     <string name="home_button_learn">Learn more</string>
 
     <string name="home_button_documentation">Read documentation</string>
-    <string name="home_button_github">View on Github</string>
 
     <!--blog-->
     <string name="blog_author">AUTHOR</string>
@@ -48,5 +31,4 @@
     <string name="collection_list_title">FAQ</string>
     <string name="collection_title">TITLE</string>
     <string name="collection_subtitle">SUBTITLE</string>
-
 </resources>
