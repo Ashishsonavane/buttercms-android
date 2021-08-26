@@ -15,6 +15,7 @@ import com.example.buttercms.databinding.FragmentPageBinding
 import com.example.buttercms.databinding.ItemPageBinding
 import com.example.buttercms.model.Page
 import com.example.buttercms.ui.main.viewpager.ViewPagerContainerFragmentDirections
+import com.example.buttercms.utils.DateFormatter
 import com.example.buttercms.utils.createCoroutineErrorHandler
 import kotlinx.coroutines.launch
 
@@ -87,9 +88,10 @@ class PageAdapter :
     class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(page: Page) {
             val binding = ItemPageBinding.bind(itemView)
+            val date = DateFormatter().formatDate(page.fields.study_date)
             binding.apply {
                 tvTitlePage.text = page.name
-                tvStudyNameDetail.text = page.fields.study_date
+                tvStudyNameDetail.text = date
                 Glide.with(itemView)
                     .load(page.fields.featured_image)
                     .into(imgPage)
@@ -97,7 +99,7 @@ class PageAdapter :
                 itemView.setOnClickListener {
                     itemView.findNavController().navigate(
                         ViewPagerContainerFragmentDirections.actionStartDestToPageDetailFragment(
-                            page
+                            page, date.toString()
                         )
                     )
                 }

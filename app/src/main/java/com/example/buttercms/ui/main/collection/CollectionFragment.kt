@@ -84,8 +84,8 @@ class CollectionFragment : Fragment() {
             fun bind(collection: Collection) {
                 val binding = ItemCollectionBinding.bind(itemView)
                 binding.apply {
-                    binding.tvTitleCollection.text = collection.question
-                    binding.tvSubtitleCollection.text = collection.answer
+                    tvTitleCollection.text = collection.question
+                    tvSubtitleCollection.text = collection.answer
                 }
             }
         }

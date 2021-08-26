@@ -91,10 +91,10 @@ class BlogAdapter : ListAdapter<Blog, BlogAdapter.NewsItemViewHolder>(DiffCallba
             val authorFirstName = blog.author.firstName
             val authorLastName = blog.author.lastName
             binding.apply {
-                binding.tvAuthorBlogItem.text = "$authorFirstName $authorLastName"
-                binding.tvTitleBlogItem.text = blog.title
-                binding.tvSubtitleBlogItem.text = blog.subtitle
-                binding.tvTimeBlogItem.text = date
+                tvAuthorBlogItem.text = "$authorFirstName $authorLastName"
+                tvTitleBlogItem.text = blog.title
+                tvSubtitleBlogItem.text = blog.subtitle
+                tvTimeBlogItem.text = date
 
                 Glide.with(itemView)
                     .load(blog.image)

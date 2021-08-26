@@ -28,3 +28,30 @@ data class Field(
     val reviewer: String,
     val study_date: String
 ) : Parcelable
+
+@Parcelize
+data class HomePageResponse(
+    val data: List<HomePage>
+) : Parcelable
+
+@Parcelize
+data class HomePage(
+    val fields: HomeField
+) : Parcelable
+
+@Parcelize
+data class HomeField(
+    val headline: String,
+    val subheadline: String,
+    val section: List<Section>,
+    @Json(name = "documentationurl")
+    val docUrl: String
+) : Parcelable
+
+@Parcelize
+
+data class Section(
+    val title: String,
+    val subtitle: String,
+    val buttonurl: String
+) : Parcelable

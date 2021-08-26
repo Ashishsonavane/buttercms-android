@@ -34,9 +34,9 @@
         <argument
             android:name="page"
             app:argType="com.example.buttercms.model.Page" />
-<!--        <argument-->
-<!--            android:name="time"-->
-<!--            app:argType="string" />-->
+        <argument
+            android:name="time"
+            app:argType="string" />
     </fragment>
 
 

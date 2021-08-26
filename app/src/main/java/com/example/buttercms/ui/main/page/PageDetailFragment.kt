@@ -24,7 +24,7 @@ class PageDetailFragment : Fragment() {
 
         binding.apply {
             tvTitlePageDetail.text = args.page.fields.title
-            tvStudyDateName.text = args.page.fields.study_date
+            tvStudyDateName.text = args.time
             tvIndustryName.text = args.page.fields.industry
             tvContentPageDetail.text = args.page.fields.content
             Glide.with(view)
