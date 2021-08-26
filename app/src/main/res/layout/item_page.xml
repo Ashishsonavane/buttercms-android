@@ -69,6 +69,7 @@
                 android:id="@+id/tv_study_name_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_below="@+id/tv_title_page"
                 android:layout_marginTop="10dp"
                 android:text="@string/page_item_study_date_value"
