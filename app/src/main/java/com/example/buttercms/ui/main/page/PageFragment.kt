@@ -30,7 +30,7 @@ class PageFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPageBinding.inflate(inflater, container, false)
         val view = binding.root
 

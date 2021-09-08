@@ -15,7 +15,7 @@ class BlogDetailFragment : Fragment() {
     private var _binding: FragmentBlogDetailBinding? = null
     private val binding get() = _binding!!
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint("SetJavaScriptEnabled", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

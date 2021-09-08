@@ -1,5 +1,6 @@
 package com.example.buttercms.ui.main.blog
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -85,6 +86,7 @@ class BlogAdapter : ListAdapter<Blog, BlogAdapter.NewsItemViewHolder>(DiffCallba
     }
 
     class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        @SuppressLint("SetTextI18n")
         fun bind(blog: Blog) {
             val binding = ItemBlogBinding.bind(itemView)
             val date = DateFormatter().formatDate(blog.published)

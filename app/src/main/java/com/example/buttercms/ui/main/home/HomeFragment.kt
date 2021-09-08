@@ -1,5 +1,6 @@
 package com.example.buttercms.ui.main.home
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.*
 import com.example.buttercms.R
 import com.example.buttercms.databinding.FragmentHomeBinding
 import com.example.buttercms.databinding.ItemHomeBinding
+import com.example.buttercms.model.HomePage
 import com.example.buttercms.model.Section
 import com.example.buttercms.utils.createCoroutineErrorHandler
 import com.google.android.material.tabs.TabLayout
@@ -33,6 +35,7 @@ class HomeFragment : Fragment() {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,12 +49,8 @@ class HomeFragment : Fragment() {
             viewLifecycleOwner,
             { homePage ->
                 homeAdapter.submitList(homePage[0].fields.section)
-
-                val headline = homePage[0].fields.headline
-                val headlineFirst = headline.substring(0, headline.indexOf(' '))
-                val headlineSecond = headline.substring(headline.indexOf(' '))
-                    .replace("""^\s*|\s*$""".toRegex(), "")
-                binding.tvTitleHome.text = headlineFirst + "\n" + headlineSecond
+                val headlineName = formatHeadline(homePage)
+                binding.tvTitleHome.text = headlineName.first + "\n" + headlineName.second
 
                 val subHeadline = homePage[0].fields.subheadline
                 binding.tvSubtitleHome.text = subHeadline
@@ -80,6 +79,14 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun formatHeadline(homePage: List<HomePage>): Pair<String, String> {
+        val headline = homePage[0].fields.headline
+        val headlineFirst = headline.substring(0, headline.indexOf(' '))
+        val headlineSecond = headline.substring(headline.indexOf(' '))
+            .replace("""^\s*|\s*$""".toRegex(), "")
+        return Pair(headlineFirst, headlineSecond)
     }
 
     private fun redirectUrl(url: String) {
