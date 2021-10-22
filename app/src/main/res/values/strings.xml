@@ -24,7 +24,8 @@
     <string name="page_item_study_date_value">July 01 1990</string>
     <string name="page_item_industry">Industry: </string>
     <string name="page_item_industry_name">Engine Parts</string>
-    <string name="page_item_reviewer">Reviewed by customer</string>
+    <string name="page_item_reviewer">Reviewer: </string>
+    <string name="page_item_reviewer_name">reviewed by customer</string>
     <string name="page_item_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet odio accumsan, sollicitudin mi vel, condimentum sapien. Nullam sed laoreet leo. Sed a ligula quis ante luctus volutpat et cursus enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque et erat tincidunt, volutpat augue id, viverra felis. Sed pharetra, libero ut euismod euismod, leo metus commodo metus</string>
 
     <!-- collection -->

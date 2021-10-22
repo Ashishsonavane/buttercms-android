@@ -14,6 +14,7 @@ data class Page(
     @Json(name = "slug")
     val subtitle: String,
     val name: String,
+    val published: String,
     val page_type: String,
     val fields: Field
 ) : Parcelable

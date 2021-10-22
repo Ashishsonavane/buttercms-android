@@ -38,7 +38,7 @@ class PageFragment : Fragment() {
         pageViewModel.getData().observe(
             viewLifecycleOwner,
             { page ->
-                pageAdapter.submitList(page)
+                pageAdapter.submitList(page.sortedBy { it.fields.study_date })
             }
         )
 
@@ -92,8 +92,11 @@ class PageAdapter :
             binding.apply {
                 tvTitlePage.text = page.name
                 tvStudyNameDetail.text = date
+                tvReviewNamePage.text = page.fields.reviewer
                 Glide.with(itemView)
                     .load(page.fields.featured_image)
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken)
                     .into(imgPage)
 
                 itemView.setOnClickListener {
