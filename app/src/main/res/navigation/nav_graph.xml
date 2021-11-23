@@ -23,7 +23,7 @@
         android:name="com.example.buttercms.ui.main.blog.BlogDetailFragment">
         <argument
             android:name="blog"
-            app:argType="com.example.buttercms.model.Blog" />
+            app:argType="com.buttercms.model.Data" />
         <argument
             android:name="time"
             app:argType="string" />

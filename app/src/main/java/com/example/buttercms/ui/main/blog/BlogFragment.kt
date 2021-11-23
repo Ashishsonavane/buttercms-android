@@ -11,12 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
+import com.buttercms.model.Data
 import com.example.buttercms.R
 import com.example.buttercms.databinding.FragmentBlogBinding
 import com.example.buttercms.databinding.ItemBlogBinding
-import com.example.buttercms.model.Blog
 import com.example.buttercms.ui.main.viewpager.ViewPagerContainerFragmentDirections
-import com.example.buttercms.utils.DateFormatter
 import com.example.buttercms.utils.createCoroutineErrorHandler
 import kotlinx.coroutines.launch
 
@@ -74,7 +73,7 @@ class BlogFragment : Fragment() {
     }
 }
 
-class BlogAdapter : ListAdapter<Blog, BlogAdapter.NewsItemViewHolder>(DiffCallback()) {
+class BlogAdapter : ListAdapter<Data, BlogAdapter.NewsItemViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_blog, parent, false)
@@ -87,19 +86,20 @@ class BlogAdapter : ListAdapter<Blog, BlogAdapter.NewsItemViewHolder>(DiffCallba
 
     class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
-        fun bind(blog: Blog) {
+        fun bind(blog: Data) {
             val binding = ItemBlogBinding.bind(itemView)
-            val date = DateFormatter().formatDate(blog.published)
-            val authorFirstName = blog.author.firstName
-            val authorLastName = blog.author.lastName
+            val authorFirstName = blog.author?.first_name
+            val authorLastName = blog.author?.last_name
+            val date = blog.published.toString()
+            val blogDate = date.substring(0, 10) + date.substring(29, 34)
             binding.apply {
                 tvAuthorBlogItem.text = "$authorFirstName $authorLastName"
                 tvTitleBlogItem.text = blog.title
-                tvSubtitleBlogItem.text = blog.subtitle
-                tvTimeBlogItem.text = date
+                tvSubtitleBlogItem.text = blog.slug
+                tvTimeBlogItem.text = blogDate
 
                 Glide.with(itemView)
-                    .load(blog.image)
+                    .load(blog.featured_image)
                     .into(binding.ivBlogItem)
             }
 
@@ -107,7 +107,7 @@ class BlogAdapter : ListAdapter<Blog, BlogAdapter.NewsItemViewHolder>(DiffCallba
                 itemView.findNavController().navigate(
                     ViewPagerContainerFragmentDirections.actionStartDestToBlogDetailFragment(
                         blog,
-                        date.toString()
+                        blogDate
                     )
                 )
             }
@@ -115,13 +115,13 @@ class BlogAdapter : ListAdapter<Blog, BlogAdapter.NewsItemViewHolder>(DiffCallba
     }
 }
 
-class DiffCallback : DiffUtil.ItemCallback<Blog>() {
+class DiffCallback : DiffUtil.ItemCallback<Data>() {
 
-    override fun areItemsTheSame(oldItem: Blog, newItem: Blog): Boolean {
+    override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Blog, newItem: Blog): Boolean {
+    override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {
         return oldItem.title == newItem.title
     }
 }

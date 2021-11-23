@@ -24,21 +24,21 @@ class BlogDetailFragment : Fragment() {
         _binding = FragmentBlogDetailBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val authorFirstName = args.blog.author.firstName
-        val authorLastName = args.blog.author.lastName
+        val authorFirstName = args.blog.author?.first_name
+        val authorLastName = args.blog.author?.last_name
 
         binding.apply {
             tvAuthorBlogDetail.text =
                 "$authorFirstName $authorLastName"
             tvTitleBlogDetail.text = args.blog.title
-            tvSubtitleBlogDetail.text = args.blog.subtitle
+            tvSubtitleBlogDetail.text = args.blog.slug
             tvTimeBlogDetail.text = args.time
             Glide.with(view)
-                .load(args.blog.image)
+                .load(args.blog.featured_image)
                 .into(ivBlogDetail)
 
             wvBlogDetail.apply {
-                loadData(args.blog.body, "text/html; charset=UTF-8", "null")
+                loadData(args.blog.body.toString(), "text/html; charset=UTF-8", "null")
                 settings.javaScriptEnabled = true
             }
         }

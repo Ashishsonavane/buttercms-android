@@ -48,15 +48,15 @@ class HomeFragment : Fragment() {
         homeViewModel.getData().observe(
             viewLifecycleOwner,
             { homePage ->
-                homeAdapter.submitList(homePage[0].fields.section)
+                homeAdapter.submitList(homePage.fields?.section)
                 val headlineName = formatHeadline(homePage)
                 binding.tvTitleHome.text = headlineName.first + "\n" + headlineName.second
 
-                val subHeadline = homePage[0].fields.subheadline
+                val subHeadline = homePage.fields?.subheadline
                 binding.tvSubtitleHome.text = subHeadline
 
                 binding.btnReadDoc.setOnClickListener {
-                    redirectUrl(homePage[0].fields.docUrl)
+                    redirectUrl(homePage.fields?.documentationurl.toString())
                 }
             }
         )
@@ -81,11 +81,11 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun formatHeadline(homePage: List<HomePage>): Pair<String, String> {
-        val headline = homePage[0].fields.headline
-        val headlineFirst = headline.substring(0, headline.indexOf(' '))
-        val headlineSecond = headline.substring(headline.indexOf(' '))
-            .replace("""^\s*|\s*$""".toRegex(), "")
+    private fun formatHeadline(homePage: HomePage): Pair<String?, String?> {
+        val headline = homePage.fields?.headline
+        val headlineFirst = headline?.substring(0, headline.indexOf(' '))
+        val headlineSecond = headline?.substring(headline.indexOf(' '))
+            ?.replace("""^\s*|\s*$""".toRegex(), "")
         return Pair(headlineFirst, headlineSecond)
     }
 

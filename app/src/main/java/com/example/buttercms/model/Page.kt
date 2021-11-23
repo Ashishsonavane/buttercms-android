@@ -1,20 +1,19 @@
 package com.example.buttercms.model
 
 import android.os.Parcelable
-import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
+import java.util.Date
 
 data class PageResponse(
-    @Json(name = "data")
-    val pages: List<Page>
+    val data: List<Page>
 )
 
 @Parcelize
 data class Page(
-    @Json(name = "slug")
-    val subtitle: String,
+    val slug: String,
     val name: String,
-    val published: String,
+    val published: Date?,
+    val updated: Date?,
     val page_type: String,
     val fields: Field
 ) : Parcelable
@@ -32,25 +31,28 @@ data class Field(
 
 @Parcelize
 data class HomePageResponse(
-    val data: List<HomePage>
+    val data: HomePage
 ) : Parcelable
 
 @Parcelize
 data class HomePage(
-    val fields: HomeField
+    val slug: String?,
+    val name: String?,
+    val published: Date?,
+    val updated: Date?,
+    val page_type: String?,
+    val fields: HomeField?
 ) : Parcelable
 
 @Parcelize
 data class HomeField(
     val headline: String,
-    val subheadline: String,
+    val subheadline: String?,
     val section: List<Section>,
-    @Json(name = "documentationurl")
-    val docUrl: String
+    val documentationurl: String?
 ) : Parcelable
 
 @Parcelize
-
 data class Section(
     val title: String,
     val subtitle: String,
