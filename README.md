@@ -11,6 +11,7 @@ The app is connected to a sample ButterCMS instance. It demonstrates usage of th
 Pages and Collections data classes are generic and needs to be defined by user. 
 For this sample are these classes prepared: 
 - [Page](https://github.com/deAnnaa/buttercms/blob/master/app/src/main/java/com/example/buttercms/model/Page.kt)
+- [HomePage](https://github.com/deAnnaa/buttercms/blob/master/app/src/main/java/com/example/buttercms/model/HomePage.kt)
 - [Collection](https://github.com/deAnnaa/buttercms/blob/master/app/src/main/java/com/example/buttercms/model/Collection.kt)
 
 
