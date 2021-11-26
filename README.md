@@ -18,6 +18,11 @@ For this sample are these classes prepared:
 ## Installation
 Requirements: Android Studio (min 4.2+ version)
 - Download Sample application from Github
+- 
+``
+git clone https://github.com/ButterCMS/buttercms-ios.git
+``
+
 - Open file buttercms
 - Build and Run
 
@@ -26,7 +31,7 @@ First of all you need to create instance of ButterCMS client.
 For that you need to change apikey in MainActivity.kt, line 17
 
 ``
-val client = ButterCMS("3606556ecbd4134ea24b8936a829ab9edaddb583")
+val client = ButterCMS("your_api_key")
 ``
 
 Then you need to change models to reflect you configuration of pages, collections and posts. 
