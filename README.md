@@ -21,3 +21,13 @@ Requirements: Android Studio (min 4.2+ version)
 - Open file buttercms
 - Build and Run
 
+## Amend to your needs
+First of all you need to create instance of ButterCMS client. 
+For that you need to change apikey in MainActivity.kt, line 17
+
+``
+val client = ButterCMS("3606556ecbd4134ea24b8936a829ab9edaddb583")
+``
+
+Then you need to change models to reflect you configuration of pages, collections and posts. 
+You can find existing ones in folder Model.
