@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
@@ -16,8 +16,6 @@ import com.example.buttercms.R
 import com.example.buttercms.databinding.FragmentBlogBinding
 import com.example.buttercms.databinding.ItemBlogBinding
 import com.example.buttercms.ui.main.viewpager.ViewPagerContainerFragmentDirections
-import com.example.buttercms.utils.createCoroutineErrorHandler
-import kotlinx.coroutines.launch
 
 class BlogFragment : Fragment() {
 
@@ -42,6 +40,10 @@ class BlogFragment : Fragment() {
             }
         )
 
+        blogViewModel.errorMessage.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
         binding.rvBlog.apply {
             adapter = blogAdapter
             layoutManager = LinearLayoutManager(context)
@@ -50,9 +52,7 @@ class BlogFragment : Fragment() {
 
         binding.srlReloadBlog.apply {
             setOnRefreshListener {
-                lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
-                    blogViewModel.loadData()
-                }
+                blogViewModel.loadData()
                 isRefreshing = false
             }
         }
@@ -66,9 +66,7 @@ class BlogFragment : Fragment() {
     }
 
     override fun onResume() {
-        lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
-            blogViewModel.loadData()
-        }
+        blogViewModel.loadData()
         super.onResume()
     }
 }

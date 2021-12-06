@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.*
 import com.example.buttercms.R
 import com.example.buttercms.databinding.FragmentCollectionBinding
 import com.example.buttercms.databinding.ItemCollectionBinding
 import com.example.buttercms.model.Collection
-import com.example.buttercms.utils.createCoroutineErrorHandler
-import kotlinx.coroutines.launch
 
 class CollectionFragment : Fragment() {
 
@@ -37,6 +35,11 @@ class CollectionFragment : Fragment() {
                 collectionAdapter.submitList(collections)
             }
         )
+
+        collectionViewModel.errorMessage.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
         binding.rvCollections.apply {
             adapter = collectionAdapter
             layoutManager = LinearLayoutManager(context)
@@ -45,9 +48,7 @@ class CollectionFragment : Fragment() {
 
         binding.srlReloadCollection.apply {
             setOnRefreshListener {
-                lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
-                    collectionViewModel.loadData()
-                }
+                collectionViewModel.loadData()
                 isRefreshing = false
             }
         }
@@ -61,9 +62,7 @@ class CollectionFragment : Fragment() {
     }
 
     override fun onResume() {
-        lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
-            collectionViewModel.loadData()
-        }
+        collectionViewModel.loadData()
         super.onResume()
     }
 

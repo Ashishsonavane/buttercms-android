@@ -9,19 +9,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.*
 import com.example.buttercms.R
 import com.example.buttercms.databinding.FragmentHomeBinding
 import com.example.buttercms.databinding.ItemHomeBinding
 import com.example.buttercms.model.HomePage
 import com.example.buttercms.model.Section
-import com.example.buttercms.utils.createCoroutineErrorHandler
 import com.google.android.material.tabs.TabLayout
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -61,6 +59,10 @@ class HomeFragment : Fragment() {
             }
         )
 
+        homeViewModel.errorMessage.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
         binding.rvHome.apply {
             adapter = homeAdapter
             layoutManager = LinearLayoutManager(context)
@@ -70,9 +72,7 @@ class HomeFragment : Fragment() {
         binding.apply {
             srlReloadHome.apply {
                 setOnRefreshListener {
-                    lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
-                        homeViewModel.loadData()
-                    }
+                    homeViewModel.loadData()
                     isRefreshing = false
                 }
             }
@@ -102,9 +102,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onResume() {
-        lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
-            homeViewModel.loadData()
-        }
+        homeViewModel.loadData()
         super.onResume()
     }
 }

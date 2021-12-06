@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
@@ -15,8 +15,6 @@ import com.example.buttercms.databinding.FragmentPageBinding
 import com.example.buttercms.databinding.ItemPageBinding
 import com.example.buttercms.model.Page
 import com.example.buttercms.ui.main.viewpager.ViewPagerContainerFragmentDirections
-import com.example.buttercms.utils.createCoroutineErrorHandler
-import kotlinx.coroutines.launch
 
 class PageFragment : Fragment() {
 
@@ -41,6 +39,10 @@ class PageFragment : Fragment() {
             }
         )
 
+        pageViewModel.errorMessage.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
         binding.rvPages.apply {
             adapter = pageAdapter
             layoutManager = LinearLayoutManager(context)
@@ -49,9 +51,7 @@ class PageFragment : Fragment() {
 
         binding.srlReloadPage.apply {
             setOnRefreshListener {
-                lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
-                    pageViewModel.loadData()
-                }
+                pageViewModel.loadData()
                 isRefreshing = false
             }
         }
@@ -65,9 +65,7 @@ class PageFragment : Fragment() {
     }
 
     override fun onResume() {
-        lifecycleScope.launch(createCoroutineErrorHandler(requireContext())) {
-            pageViewModel.loadData()
-        }
+        pageViewModel.loadData()
         super.onResume()
     }
 }

@@ -1,6 +1,5 @@
 package com.example.buttercms.ui.main.blog
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.buttercms.error.Callback
@@ -9,10 +8,14 @@ import com.buttercms.getPosts
 import com.buttercms.model.Data
 import com.buttercms.model.Posts
 import com.example.buttercms.MainActivity.Butter.client
+import kotlinx.coroutines.*
 
 class BlogViewModel : ViewModel() {
 
     private val apiResponseBlog by lazy { MutableLiveData<List<Data>>() }
+    private val viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    val errorMessage = MutableLiveData<String>()
 
     fun getData(): MutableLiveData<List<Data>> = apiResponseBlog
 
@@ -20,16 +23,28 @@ class BlogViewModel : ViewModel() {
         val queryParameters = HashMap<String, String>()
         queryParameters["locale"] = "en"
         queryParameters["preview"] = "1"
-        client.data.getPosts(
-            emptyMap(),
-            callback = object : Callback<Posts, RestCallError> {
-                override fun success(response: Posts) {
-                    apiResponseBlog.postValue(response.data)
+        coroutineScope.launch {
+            client.data.getPosts(
+                emptyMap(),
+                callback = object : Callback<Posts, RestCallError> {
+                    override fun success(response: Posts) {
+                        apiResponseBlog.postValue(response.data)
+                    }
+
+                    override fun failure(error: RestCallError) {
+                        onError("Error: ${error.errorMessage + " " + error.errorBody}")
+                    }
                 }
-                override fun failure(error: RestCallError) {
-                    Log.w("Error", error.errorMessage.toString() + error.errorBody.toString())
-                }
-            }
-        )
+            )
+        }
+    }
+
+    private fun onError(message: String) {
+        errorMessage.value = message
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }
