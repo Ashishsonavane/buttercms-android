@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     companion object Butter {
-        val client = ButterCMS("3606556ecbd4134ea24b8936a829ab9edaddb583")
+        val client = ButterCMS("your_api_key")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
