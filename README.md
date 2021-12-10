@@ -1,7 +1,8 @@
 # Buttercms
 This repository is an example of using buttercms client from [android library](https://github.com/ButterCMS/buttercms-kotlin).
 
-<img src="https://github.com/deAnnaa/buttercms/blob/master/screenshots/screenshot.png" width=20% height=20%> <img src="https://github.com/deAnnaa/buttercms/blob/master/screenshots/screenshot_1.png" width=20% height=20%> <img src="https://github.com/deAnnaa/buttercms/blob/master/screenshots/screenshot_2.png" width=20% height=20%> <img src="https://github.com/deAnnaa/buttercms/blob/master/screenshots/screenshot_3.png" width=20% height=20%>
+<img src="https://github.com/ButterCMS/buttercms-android/blob/master/screenshots/screenshot.png" width=20% height=20%> <img src="https://github.com/ButterCMS/buttercms-android/blob/master/screenshots/screenshot_1.png" width=20% height=20%> <img src="https://github.com/ButterCMS/buttercms-android/blob/master/screenshots/screenshot_2.png" width=20% height=20%> <img src="https://github.com/ButterCMS/buttercms-android/blob/master/screenshots/screenshot_3.png" width=20% height=20%>
+
 
 The app is connected to a sample ButterCMS instance. It demonstrates usage of the following main object available in ButterCMS:
 - Pages
